@@ -10,9 +10,9 @@ LIMIT 10;
 SELECT title, 
 type, imdb
 FROM MOVIES_SHOWS
-WHERE imdb_score >= 8.0
+WHERE imdb >= 8.0
 AND type = 'TV Series'
-ORDER BY imdb_score DESC
+ORDER BY imdb DESC
 LIMIT 10;
 
 -- What were the bottom 10 Movies according to IMDB score?
@@ -142,15 +142,15 @@ WHERE t.type = 'Movie'
 AND t.imdb > 7.5 ;
 
 -- Actors who have starred in the most highly rated Movies or TV Series?
-SELECT c.ACTOR AS actor, 
+SELECT T.ACTORS AS actor, 
 COUNT(*) AS num_highly_rated_titles
 FROM MOVIES_SHOWS AS c
 JOIN caste AS t 
 ON c.id = t.id
 WHERE 
 (t.type = 'Movie' OR t.type = 'Show')
-AND t.imdb_score > 8.0
-GROUP BY c.ACTOR
+AND t.imdb > 8.0
+GROUP BY T.ACTORS
 ORDER BY num_highly_rated_titles DESC;
 
 -- Which actors played the same character in multiple Movies or TV Series? 
